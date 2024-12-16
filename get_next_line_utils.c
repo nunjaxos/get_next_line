@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abhmidat <abhmidat@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-12-16 11:05:00 by abhmidat          #+#    #+#             */
+/*   Updated: 2024/12/16 12:31:37 by abhmidat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *str)
@@ -76,24 +88,24 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*extract_line(char **remainder)
 {
-    char *newline_pos;
-    char *line = NULL;
+	char	*newline_pos;
+	char	*line;
+	char	*new_remainder;
 
-    newline_pos = ft_strchr(remainder, '\n');
-    if (newline_pos)
-    {
-        *newline_pos = '\0';
-        line = ft_strdup(*remainder);
-        char *new_remainder = ft_strdup(newline_pos + 1);
-        free(*remainder);
-        *remainder = new_remainder;
-    } 
-    else
-    {
-        line = ft_strdup(*remainder);
-        free(*remainder);
-        *remainder = NULL;
-    }
-
-    return line;
+	newline_pos = ft_strchr(*remainder, '\n');
+	if (newline_pos)
+	{
+		*newline_pos = '\0';
+		line = ft_strdup(*remainder);
+		new_remainder = ft_strdup(newline_pos + 1);
+		free(*remainder);
+		*remainder = new_remainder;
+	}
+	else
+	{
+		line = ft_strdup(*remainder);
+		free(*remainder);
+		*remainder = NULL;
+	}
+	return (line);
 }

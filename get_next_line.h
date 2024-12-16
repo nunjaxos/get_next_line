@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abhmidat <abhmidat@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-12-16 11:05:30 by abhmidat          #+#    #+#             */
+/*   Updated: 2024/12/16 12:28:40 by abhmidat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#ifndef BUFFER_SIZE
+# ifndef BUFFER_SIZE
 # define BUFFER_SIZE 1
-#endif
+# endif
 
 # include <unistd.h>
 # include <stdlib.h>
