@@ -76,16 +76,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*extract_line(char **remainder)
 {
-    char *newline_pos = ft_strchr(*remainder, '\n');
+    char *newline_pos;
     char *line = NULL;
 
-    if (newline_pos) {
+    newline_pos = ft_strchr(remainder, '\n');
+    if (newline_pos)
+    {
         *newline_pos = '\0';
         line = ft_strdup(*remainder);
         char *new_remainder = ft_strdup(newline_pos + 1);
         free(*remainder);
         *remainder = new_remainder;
-    } else {
+    } 
+    else
+    {
         line = ft_strdup(*remainder);
         free(*remainder);
         *remainder = NULL;
