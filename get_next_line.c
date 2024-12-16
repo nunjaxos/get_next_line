@@ -18,7 +18,9 @@ char	*read_until_nl(int fd, char *remainder)
 	int		bytes_read;
 	char	*nl_pos;
 	char	*tmp;
-
+	
+	if (!remainder)
+		remainder = ft_strdup("");
 	while (!(nl_pos = ft_strchr(remainder, '\n')) && bytes_read != 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
@@ -26,8 +28,7 @@ char	*read_until_nl(int fd, char *remainder)
 			return (NULL);
 		buffer[bytes_read] = '\0';
 		tmp = ft_strjoin(remainder, buffer);
-		if (remainder)
-			free(remainder);
+		free(remainder);
 		remainder = tmp;
 	}
 	return (remainder);

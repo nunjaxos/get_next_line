@@ -92,6 +92,8 @@ char	*extract_line(char **remainder)
 	char	*line;
 	char	*new_remainder;
 
+	if(!*remainder)
+		return (NULL);
 	newline_pos = ft_strchr(*remainder, '\n');
 	if (newline_pos)
 	{
