@@ -1,0 +1,95 @@
+#include "get_next_line.h"
+
+size_t	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	while (s[i] != (char)c)
+	{
+		if (!s[i])
+			return (0);
+		i++;
+	}
+	return ((char *)s + i);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*dup;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	dup = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*st_join;
+	int		i;
+	int		j;
+
+	if (!s1 && s2)
+		return (ft_strdup(s2));
+	else if (s1 && !s2)
+		return (ft_strdup(s1));
+	else if (!s1 && !s2)
+		return (NULL);
+	st_join = malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!st_join)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+		st_join[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		st_join[j++] = s2[i++];
+	st_join[j] = '\0';
+	return (st_join);
+}
+
+char	*extract_line(char **remainder)
+{
+    char *newline_pos = ft_strchr(*remainder, '\n');
+    char *line = NULL;
+
+    if (newline_pos) {
+        *newline_pos = '\0';
+        line = ft_strdup(*remainder);
+        char *new_remainder = ft_strdup(newline_pos + 1);
+        free(*remainder);
+        *remainder = new_remainder;
+    } else {
+        line = ft_strdup(*remainder);
+        free(*remainder);
+        *remainder = NULL;
+    }
+
+    return line;
+}
