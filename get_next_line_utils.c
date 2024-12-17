@@ -108,6 +108,6 @@ char	*extract_line(char **remainder)
 		line = ft_strdup(*remainder);
 		free(*remainder);
 		*remainder = NULL;
-	}	
+	}
 	return (line);
 }

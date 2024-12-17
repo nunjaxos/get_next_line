@@ -14,28 +14,27 @@
 
 char	*read_until_nl(int fd, char *remainder)
 {
-	char	buffer[BUFFER_SIZE + 1];
+	char	*buffer;
 	int		bytes_read;
-	char	*nl_pos;
-	char	*tmp;
-	
+
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (NULL);
 	if (!remainder)
 		remainder = ft_strdup("");
 	bytes_read = 1;
-
-	while (!(nl_pos = ft_strchr(remainder, '\n')) && bytes_read != 0)
+	while (!ft_strchr(remainder, '\n') && bytes_read != 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 		{
-			free(remainder);
+			free(buffer);
 			return (NULL);
 		}
 		buffer[bytes_read] = '\0';
-		tmp = ft_strjoin(remainder, buffer);
-		free(remainder);
-		remainder = tmp;	
+		remainder = ft_strjoin(remainder, buffer);
 	}
+	free(buffer);
 	return (remainder);
 }
 
@@ -57,6 +56,3 @@ char	*get_next_line(int fd)
 	}
 	return (extract_line(&remainder));
 }
-
-
-
