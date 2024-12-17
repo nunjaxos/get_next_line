@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h> 
 
 size_t	ft_strlen(const char *str)
 {
@@ -72,7 +73,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (ft_strdup(s1));
 	else if (!s1 && !s2)
 		return (NULL);
-	st_join = malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
+	st_join = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!st_join)
 		return (NULL);
 	i = 0;
@@ -92,7 +93,7 @@ char	*extract_line(char **remainder)
 	char	*line;
 	char	*new_remainder;
 
-	if(!*remainder)
+	if (!*remainder)
 		return (NULL);
 	newline_pos = ft_strchr(*remainder, '\n');
 	if (newline_pos)
@@ -108,6 +109,6 @@ char	*extract_line(char **remainder)
 		line = ft_strdup(*remainder);
 		free(*remainder);
 		*remainder = NULL;
-	}
+	}	
 	return (line);
 }

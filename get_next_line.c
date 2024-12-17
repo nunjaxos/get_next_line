@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+#include <stdio.h> 
 char	*read_until_nl(int fd, char *remainder)
 {
 	char	buffer[BUFFER_SIZE + 1];
@@ -21,15 +21,20 @@ char	*read_until_nl(int fd, char *remainder)
 	
 	if (!remainder)
 		remainder = ft_strdup("");
+	bytes_read = 1;
+
 	while (!(nl_pos = ft_strchr(remainder, '\n')) && bytes_read != 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
+		{
+			free(remainder);
 			return (NULL);
+		}
 		buffer[bytes_read] = '\0';
 		tmp = ft_strjoin(remainder, buffer);
 		free(remainder);
-		remainder = tmp;
+		remainder = tmp;	
 	}
 	return (remainder);
 }
@@ -52,3 +57,6 @@ char	*get_next_line(int fd)
 	}
 	return (extract_line(&remainder));
 }
+
+
+
