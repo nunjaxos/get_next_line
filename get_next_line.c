@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h> 
+
 char	*read_until_nl(int fd, char *remainder)
 {
 	char	buffer[BUFFER_SIZE + 1];
