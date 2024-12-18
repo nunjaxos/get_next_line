@@ -83,60 +83,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[i])
 		st_join[j++] = s2[i++];
 	st_join[j] = '\0';
-
 	free((void *)s1);
 	return (st_join);
-}
-char	*new_line(char *old_line)
-{
-	int		i;
-	int		j;
-	char	*str;
-
-	i = 0;
-	while (old_line[i] && old_line[i] != '\n')
-		i++;
-	if (!old_line[i])
-	{
-		free(old_line);
-		return (NULL);
-	}
-	str = (char *)malloc(sizeof(char) * ft_strlen(old_line) - i + 1);
-	if (!str)
-		return (NULL);
-	i++;
-	j = 0;
-	while (old_line[i])
-		str[j++] = old_line[i++];
-	str[j] = '\0';
-	free(old_line);
-	return (str);
-}
-char	*extract_line(char **remainder)
-{
-	int		i;
-	char	*str;
-
-	if (!*remainder || !(*remainder)[0])
-		return (NULL);
-	i = 0;
-	while ((*remainder)[i] && (*remainder)[i] != '\n')
-		i++;
-	str = (char *)malloc(sizeof(char) * (i + 2));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while ((*remainder)[i] && (*remainder)[i] != '\n')
-	{
-		str[i] = (*remainder)[i];
-		i++;
-	}
-	if ((*remainder)[i] == '\n')
-	{
-		str[i] = (*remainder)[i];
-		i++;
-	}
-	str[i] = '\0';
-	*remainder = new_line(*remainder);
-	return (str);
 }
