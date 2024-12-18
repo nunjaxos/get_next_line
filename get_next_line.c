@@ -29,6 +29,7 @@ char	*read_until_nl(int fd, char *remainder)
 		if (bytes_read == -1)
 		{
 			free(buffer);
+			free(remainder);
 			return (NULL);
 		}
 		buffer[bytes_read] = '\0';
@@ -41,6 +42,7 @@ char	*read_until_nl(int fd, char *remainder)
 char	*get_next_line(int fd)
 {
 	static char	*remainder;
+	char *line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -54,5 +56,6 @@ char	*get_next_line(int fd)
 		}
 		return (NULL);
 	}
-	return (extract_line(&remainder));
+	line = extract_line(&remainder);
+	return (line);
 }
