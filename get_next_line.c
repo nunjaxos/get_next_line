@@ -32,6 +32,8 @@ char	*read_until_nl(int fd, char *remainder)
 			free(remainder);
 			return (NULL);
 		}
+		if (bytes_read == 0)
+			break ;
 		buffer[bytes_read] = '\0';
 		remainder = ft_strjoin(remainder, buffer);
 	}
