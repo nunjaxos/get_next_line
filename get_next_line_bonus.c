@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abhmidat <abhmidat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 11:05:07 by abhmidat          #+#    #+#             */
-/*   Updated: 2024/12/24 18:19:14 by abhmidat         ###   ########.fr       */
+/*   Created: 2024/12/24 20:23:39 by abhmidat          #+#    #+#             */
+/*   Updated: 2024/12/24 20:23:40 by abhmidat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_until_nl(int fd, char *remainder)
 {
@@ -98,21 +98,21 @@ char	*extract_line(char **remainder)
 
 char	*get_next_line(int fd)
 {
-	static char	*remainder;
+	static char	*remainder[1024];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	remainder = read_until_nl(fd, remainder);
-	if (!remainder || *remainder == '\0')
+	remainder[fd] = read_until_nl(fd, remainder[fd]);
+	if (!remainder[fd] || *remainder[fd] == '\0')
 	{
-		if (remainder)
+		if (remainder[fd])
 		{
-			free(remainder);
-			remainder = NULL;
+			free(remainder[fd]);
+			remainder[fd] = NULL;
 		}
 		return (NULL);
 	}
-	line = extract_line(&remainder);
+	line = extract_line(&remainder[fd]);
 	return (line);
 }
